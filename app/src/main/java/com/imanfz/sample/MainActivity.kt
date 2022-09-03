@@ -1,9 +1,9 @@
 package com.imanfz.sample
 
-import com.imanfz.androidutils.base.BaseActivity
-import com.imanfz.androidutils.extension.logi
-import com.imanfz.androidutils.extension.longToast
 import com.imanfz.sample.databinding.ActivityMainBinding
+import com.imanfz.utility.base.BaseActivity
+import com.imanfz.utility.extension.logi
+import com.imanfz.utility.extension.longToast
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun setupView() {
