@@ -1,6 +1,6 @@
 # utils
 
-[![](https://jitpack.io/v/imanfz/utils.svg)](https://jitpack.io/#imanfz/utils)
+[![](https://jitpack.io/v/imanfz/android-utils.svg)](https://jitpack.io/#imanfz/android-utils)
 
 ## Feature
 - View Extension
