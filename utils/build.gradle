@@ -1,16 +1,13 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
 }
 
 android {
-    namespace = 'com.imanfz.utils'
     compileSdk 32
 
     defaultConfig {
-        aarMetadata {
-            minSdk = 23
-        }
         minSdk 23
         targetSdk 32
 
@@ -28,15 +25,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = '1.8'
     }
     buildFeatures {
         viewBinding true
-    }
-    publishing {
-        singleVariant('release') {
-            withSourcesJar()
-        }
     }
 }
 
