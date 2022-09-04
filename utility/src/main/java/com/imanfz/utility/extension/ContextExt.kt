@@ -10,7 +10,6 @@ import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.*
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.imanfz.utility.isConnectionOn
@@ -19,20 +18,6 @@ import kotlin.random.Random
 /**
  * Created by Iman Faizal on 21/May/2022
  **/
-
-fun Context.hideKeyboard() {
-    val inputMethodManager =
-        this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethodManager.hideSoftInputFromWindow(
-        (this as Activity).currentFocus?.windowToken,
-        InputMethodManager.HIDE_NOT_ALWAYS
-    )
-}
-
-fun Context.showKeyboard() {
-    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.showSoftInput((this as Activity).currentFocus, InputMethodManager.SHOW_IMPLICIT)
-}
 
 fun Context.longToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()

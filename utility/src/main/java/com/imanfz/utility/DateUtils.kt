@@ -3,6 +3,7 @@ package com.imanfz.utility
 import android.app.DatePickerDialog
 import android.content.Context
 import android.widget.TextView
+import com.imanfz.utility.extension.setSafeOnClickListener
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,7 +24,7 @@ fun showDatePicker(context: Context, textView: TextView) {
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
     val day = calendar.get(Calendar.DAY_OF_MONTH)
-    textView.setOnClickListener {
+    textView.setSafeOnClickListener {
         val datePickerDialog = DatePickerDialog(
             context,
             { _, year, monthOfYear, dayOfMonth ->

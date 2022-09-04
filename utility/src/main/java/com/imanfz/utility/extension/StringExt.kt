@@ -25,30 +25,6 @@ fun String.getFirstName(): String {
     }
 }
 
-fun String.getNumber() : String {
-    return this.filter { it.isDigit() }
-}
-
-fun String .toCurrency(
-    locale: Locale = Locale("in", "ID"),
-    currencyCode: String = "IDR",
-    withSymbols: Boolean = false,
-    minFraction: Int = 2
-) : String {
-    val decimalFormat =
-        if (withSymbols) DecimalFormat.getCurrencyInstance(locale) as DecimalFormat
-        else DecimalFormat.getNumberInstance(locale) as DecimalFormat
-
-    decimalFormat.decimalFormatSymbols = DecimalFormatSymbols(locale).apply {
-        this.currency = Currency.getInstance(currencyCode)
-        if (locale.language.equals("in")) currencySymbol = "Rp. "
-    }
-
-    decimalFormat.minimumFractionDigits = minFraction
-
-    return decimalFormat.format(this.toDouble())
-}
-
 fun String.getLastName(): String {
     var result = ""
     trim().split(" ").filter {
@@ -74,6 +50,30 @@ fun String.getInitials(limit: Int = 2): String {
         s.first().uppercase()
     }
     return buffer.toString()
+}
+
+fun String.getNumber() : String {
+    return this.filter { it.isDigit() }
+}
+
+fun String.toCurrency(
+    locale: Locale = Locale("in", "ID"),
+    currencyCode: String = "IDR",
+    withSymbols: Boolean = false,
+    minFraction: Int = 2
+) : String {
+    val decimalFormat =
+        if (withSymbols) DecimalFormat.getCurrencyInstance(locale) as DecimalFormat
+        else DecimalFormat.getNumberInstance(locale) as DecimalFormat
+
+    decimalFormat.decimalFormatSymbols = DecimalFormatSymbols(locale).apply {
+        this.currency = Currency.getInstance(currencyCode)
+        if (locale.language.equals("in")) currencySymbol = "Rp. "
+    }
+
+    decimalFormat.minimumFractionDigits = minFraction
+
+    return decimalFormat.format(this.toDouble())
 }
 
 fun String.toSpannable() = SpannableStringBuilder(this)

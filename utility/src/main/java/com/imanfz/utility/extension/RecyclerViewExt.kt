@@ -166,7 +166,7 @@ fun RecyclerView.addHorizontalItemDecoration() {
     )
 }
 
-fun RecyclerView.horizontalSpaceItem(space: Int) {
+fun RecyclerView.addHorizontalSpaceItem(space: Int) {
     addItemDecoration(object : RecyclerView.ItemDecoration() {
         override fun getItemOffsets(
             outRect: Rect,
@@ -191,7 +191,7 @@ fun RecyclerView.horizontalSpaceItem(space: Int) {
     })
 }
 
-fun RecyclerView.gridSpaceItem(
+fun RecyclerView.addGridSpaceItem(
     spaceCount: Int,
     rowSpace: Float,
     columnSpacing: Float
