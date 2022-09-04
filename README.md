@@ -77,7 +77,7 @@ class SampleFragment : BaseFragment<FragmentSampleBinding>() {
     ...
 }
 ```
-or if you have custom BaseActivity, you can extends it:
+or if you have custom BaseFragment, you can extends it:
 ```
 class BaseFragment<B : ViewBinding> : BaseFragment<B>() {
     ...
