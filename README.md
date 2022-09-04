@@ -355,24 +355,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 ```
 ### [ViewBindingExt](#viewbindingext)
    - ViewHolder
-    ```
-    inner class CharactersViewHolder(binding: RowCharacterBinding): BindingViewHolder<RowCharacterBinding>(binding) {    
-        fun bind(item: Character) {
-            ....
-            binding.tvName.text = item.name
-            ....
-            binding.root.setOnClickListener {
-               ....
-            }
-        }    
-    }
-    ```
+        ```
+        inner class CharactersViewHolder(binding: RowCharacterBinding): BindingViewHolder<RowCharacterBinding>(binding) {    
+            fun bind(item: Character) {
+                ....
+                binding.tvName.text = item.name
+                ....
+                binding.root.setOnClickListener {
+                   ....
+                }
+            }    
+        }
+        ```
    - Adapter
-    ```
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return CharactersViewHolder(parent.toBinding())
-    }
-    ```
+        ```
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+            return CharactersViewHolder(parent.toBinding())
+        }
+        ```
    - [BaseActivity](#baseactivity)
    - [BaseFragment](#basefragment) 
    - [BaseBottomSheetDialog](#basebottomsheetdialog)
