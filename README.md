@@ -50,7 +50,7 @@ and:
 
 ```gradle
 dependencies {
-    implementation 'com.github.imanfz:utils:{latest version}'
+    implementation 'com.github.imanfz:android-utils:{latest version}'
 }
 ```
 ### [BaseActivity](#baseActivity)
