@@ -42,6 +42,7 @@ abstract class BaseFragment<B : ViewBinding>: Fragment() {
     }
 
     override fun onDestroyView() {
+        hideLoading()
         super.onDestroyView()
         _binding = null
     }

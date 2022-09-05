@@ -15,6 +15,10 @@ fun getDeviceModel(): String {
     return Build.MODEL
 }
 
+fun getDeviceID() : String {
+    return "${getDeviceModel()} ${getDeviceOSCode()}"
+}
+
 fun getDeviceName(): String {
     var manufacturer = Build.MANUFACTURER
     manufacturer = manufacturer.substring(0, 1).uppercase(Locale.getDefault()) + manufacturer.substring(1)
