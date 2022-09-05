@@ -33,7 +33,7 @@
   - [ViewExt](#viewext)
   - [UriExt]
 - Utils
-  - [AppUpdateUtils]
+  - [AppUpdateUtils](#appupdateutils)
   - [DateUtils](#dateutils)
   - [DeviceUtils](#deviceutils)
   - [MetricsUtils](#metricsutils)
