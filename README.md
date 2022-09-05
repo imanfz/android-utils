@@ -6,17 +6,22 @@
 
 ![](https://img.shields.io/badge/Freelancer-29B2FE?style=for-the-badge&logo=Freelancer&logoColor=white) ![](https://img.shields.io/badge/Apple%20laptop-333333?style=for-the-badge&logo=apple&logoColor=white)
 ## Feature
+- Adapter
+  - [TabPagerAdapter]
 - Base
   - [BaseActivity](#baseactivity)
   - [BaseBottomSheetDialog](#basebottomsheetdialog)
   - [BaseDialogFragment](#basedialogfragment)
   - [BaseFragment](#basefragment)
 - Common
-  - SafeClickListener
+  - [SafeClickListener]
+- Dialog
+  - [LoadingDialog](#loadingdialog)
+  - [QRISDialog](#qrisdialog)
 - Extension
   - [ActivityExt](#activityext)
   - [ContextExt](#contextext)
-  - DateExt
+  - [DateExt]
   - [EditTextExt](#edittextext)
   - [FragmentExt](#fragmentext)
   - [IntegerExt](#integerext)
@@ -26,7 +31,9 @@
   - [StringExt](#stringext)
   - [ViewBindingExt](#viewbindingext)
   - [ViewExt](#viewext)
+  - [UriExt]
 - Utils
+  - [AppUpdateUtils](#appupdateutils)
   - [DateUtils](#dateutils)
   - [DeviceUtils](#deviceutils)
   - [MetricsUtils](#metricsutils)
@@ -81,6 +88,36 @@ or if you have custom BaseFragment, you can extends it:
 ```
 class BaseFragment<B : ViewBinding> : BaseFragment<B>() {
     ...
+}
+```
+### [LoadingDialog](#loadingdialog)
+```
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+    ...
+    binding.apply {
+        btnLoading.setSafeOnClickListener {
+            showLoading()
+            lifecycle.coroutineScope.apply {
+               launch {
+                  delay(3000)
+                  hideLoading()
+               }
+            }
+        }
+    }
+}
+```
+### [QRISDialog](#qrisdialog)
+```
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+    ...
+    binding.apply {
+        btnQris.setSafeOnClickListener {
+           QRISDialog().apply {
+              show(supportFragmentManager, TAG)
+           }
+        }
+    }
 }
 ```
 ### [ActivityExt](#activityext)
@@ -402,6 +439,33 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 }
             )
         }
+    }
+}
+```
+### [AppUpdateUtils](#appupdateutils)
+```
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+    private lateinit var appUpdateUtils: AppUpdateUtils
+    ...
+    override fun onCreate(savedInstanceState: Bundle?) {
+        appUpdateUtils = AppUpdateUtils(this)
+    }
+    
+    override fun onResume() {
+        super.onResume()
+        appUpdateUtils.onResume()
+    }
+    
+    override fun onDestroy() {
+        appUpdateUtils.onDestroy()
+        super.onDestroy()
+    }
+    
+    @Deprecated("Deprecated in Java")
+    @Suppress("DEPRECATION")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        appUpdateUtils.onActivityResult(requestCode, resultCode)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }
 ```
