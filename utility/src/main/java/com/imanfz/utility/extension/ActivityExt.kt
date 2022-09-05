@@ -15,6 +15,9 @@ import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.findViewTreeLifecycleOwner
+import kotlinx.coroutines.*
 
 /**
  * Created by Iman Faizal on 30/Aug/2022
@@ -115,4 +118,15 @@ fun Activity.snackBarWithAction(
     onClicked: () -> Unit
 ) {
     currentFocus?.snackBarWithAction(message, actionLabel, onClicked)
+}
+
+fun Activity.delayOnLifecycle(
+    duration: Long = 3000,
+    dispatcher: CoroutineDispatcher = Dispatchers.Main,
+    block: () -> Unit
+): Job? = currentFocus?.findViewTreeLifecycleOwner()?.let { lifecycleOwner ->
+    lifecycleOwner.lifecycle.coroutineScope.launch(dispatcher) {
+        delay(duration)
+        block()
+    }
 }

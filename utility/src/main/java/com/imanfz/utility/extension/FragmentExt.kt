@@ -3,6 +3,9 @@ package com.imanfz.utility.extension
 import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.findViewTreeLifecycleOwner
+import kotlinx.coroutines.*
 
 /**
  * Created by Iman Faizal on 30/Aug/2022
@@ -98,6 +101,17 @@ fun Fragment.snackBarWithAction(
     onClicked: () -> Unit
 ) {
     view?.snackBarWithAction(message, actionLabel, onClicked)
+}
+
+fun Fragment.delayOnLifecycle(
+    duration: Long = 3000,
+    dispatcher: CoroutineDispatcher = Dispatchers.Main,
+    block: () -> Unit
+): Job? = view?.findViewTreeLifecycleOwner()?.let { lifecycleOwner ->
+    lifecycleOwner.lifecycle.coroutineScope.launch(dispatcher) {
+        delay(duration)
+        block()
+    }
 }
 
 /*

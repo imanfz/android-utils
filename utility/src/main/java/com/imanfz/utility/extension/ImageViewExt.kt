@@ -2,12 +2,15 @@ package com.imanfz.utility.extension
 
 import android.net.Uri
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.imanfz.utility.GlideApp
+import com.imanfz.utility.R
 import com.imanfz.utility.convertDpToPixel
+import com.imanfz.utility.model.baseListOperator
 
 /**
  * Created by Iman Faizal on 21/May/2022
@@ -86,4 +89,20 @@ fun ShapeableImageView.setRadius(radius: Int) {
         .toBuilder()
         .setAllCornerSizes(convertDpToPixel(radius.toFloat(), context))
         .build()
+}
+
+fun ImageView.checkOperator(text: String): Boolean {
+    return if (text.length > 3) {
+        val result = baseListOperator.firstOrNull { it.prefix.contains(text.substring(0, 4)) }
+        if (result != null) {
+            setImageDrawable(ContextCompat.getDrawable(context, result.icon))
+            true
+        } else {
+            setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_phone_android))
+            false
+        }
+    } else {
+        setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_phone_android))
+        false
+    }
 }
