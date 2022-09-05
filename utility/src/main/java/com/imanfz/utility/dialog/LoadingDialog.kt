@@ -26,10 +26,6 @@ class LoadingDialog(
 //        window?.setDimAmount(0F)
         setContentView(R.layout.fragment_loading_dialog)
         setCancelable(false)
-        findViewById<ImageView>(R.id.loading).startAnimation(
-            AnimationUtils.loadAnimation(context, R.anim.spinner_animation).apply {
-                repeatCount = Animation.INFINITE
-            }
-        )
     }
+
 }
