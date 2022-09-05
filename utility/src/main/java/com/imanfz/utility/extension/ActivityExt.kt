@@ -11,6 +11,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
 import android.util.Size
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -106,4 +107,12 @@ fun Activity.longSnack(text: String) {
 
 fun Activity.shortSnack(text: String) {
     currentFocus?.shortSnack(text)
+}
+
+fun Activity.snackBarWithAction(
+    message: String,
+    actionLabel: String,
+    onClicked: () -> Unit
+) {
+    currentFocus?.snackBarWithAction(message, actionLabel, onClicked)
 }

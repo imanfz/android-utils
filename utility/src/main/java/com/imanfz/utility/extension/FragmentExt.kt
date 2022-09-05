@@ -92,6 +92,14 @@ fun Fragment.shortSnack(text: String) {
     view?.shortSnack(text)
 }
 
+fun Fragment.snackBarWithAction(
+    message: String,
+    actionLabel: String,
+    onClicked: () -> Unit
+) {
+    view?.snackBarWithAction(message, actionLabel, onClicked)
+}
+
 /*
 fun Fragment.showDialogFailSingle(
     desc: String,

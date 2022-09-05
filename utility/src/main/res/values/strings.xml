@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_app_failed">Update app failed!</string>
+    <string name="restart">RESTART</string>
+    <string name="update_downloaded">App just downloaded an update</string>
+    <string name="update_cancelled">App update cancelled</string>
+    <string name="try_update">TRY</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="failed">Failed</string>
+    <string name="read_write_required">Read/Write Storage permissions are required to do the task.</string>
+    <string name="camera_required">Camera permissions are required to do the task.</string>
+    <string name="result_not_found">Result Not Found</string>
+    <string name="error_please_try_again">An error occurred, please try again</string>
+    <string name="need_permission">Need permission</string>
+    <string name="error_decoding_qr">QR Code decoding error, Please choose the correct QR Code image!</string>
+</resources>

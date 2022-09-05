@@ -3,6 +3,7 @@ package com.imanfz.utility.base
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.imanfz.utility.dialog.LoadingDialog
 import com.imanfz.utility.extension.getBinding
 
 /**
@@ -12,6 +13,7 @@ import com.imanfz.utility.extension.getBinding
 abstract class BaseActivity<B: ViewBinding>: AppCompatActivity() {
 
     lateinit var binding : B
+    private lateinit var loadingDialog: LoadingDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +21,7 @@ abstract class BaseActivity<B: ViewBinding>: AppCompatActivity() {
             binding = getBinding()
             setContentView(binding.root)
         }
+        loadingDialog = LoadingDialog(this)
         setupView()
         setupObserver()
         setupListener()
@@ -34,5 +37,14 @@ abstract class BaseActivity<B: ViewBinding>: AppCompatActivity() {
     open fun setupObserver() {}
 
     open fun setupListener() {}
+
+    fun showLoading() {
+        if (!loadingDialog.isShowing) loadingDialog.show()
+    }
+
+    fun hideLoading() {
+        if (loadingDialog.isShowing) loadingDialog.dismiss()
+    }
+
 
 }

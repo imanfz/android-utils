@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.viewbinding.ViewBinding
+import com.imanfz.utility.dialog.LoadingDialog
 import com.imanfz.utility.extension.getBinding
 
 /**
@@ -20,6 +21,9 @@ open class BaseDialogFragment<B : ViewBinding> : DialogFragment() {
             "Should only use binding after onCreateView and before onDestroyView"
         )
 
+    protected fun requireBinding(): B = requireNotNull(_binding)
+    private lateinit var loadingDialog: LoadingDialog
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,6 +31,11 @@ open class BaseDialogFragment<B : ViewBinding> : DialogFragment() {
     ): View {
         _binding = getBinding(inflater, container)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loadingDialog = LoadingDialog(requireContext())
     }
 
     override fun onDestroyView() {
@@ -39,4 +48,12 @@ open class BaseDialogFragment<B : ViewBinding> : DialogFragment() {
     open fun setupObserver() {}
 
     open fun setupListener() {}
+
+    fun showLoading() {
+        if (!loadingDialog.isShowing) loadingDialog.show()
+    }
+
+    fun hideLoading() {
+        if (loadingDialog.isShowing) loadingDialog.dismiss()
+    }
 }

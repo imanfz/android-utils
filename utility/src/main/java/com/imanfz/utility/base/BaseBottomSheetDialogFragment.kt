@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.imanfz.utility.dialog.LoadingDialog
 import com.imanfz.utility.extension.getBinding
 
 /**
@@ -19,6 +20,8 @@ open class BaseBottomSheetDialogFragment<B : ViewBinding> : BottomSheetDialogFra
         get() = _binding ?: throw RuntimeException(
             "Should only use binding after onCreateView and before onDestroyView"
         )
+    protected fun requireBinding(): B = requireNotNull(_binding)
+    private lateinit var loadingDialog: LoadingDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +30,11 @@ open class BaseBottomSheetDialogFragment<B : ViewBinding> : BottomSheetDialogFra
     ): View {
         _binding = getBinding(inflater, container)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loadingDialog = LoadingDialog(requireContext())
     }
 
     override fun onDestroyView() {
@@ -39,4 +47,12 @@ open class BaseBottomSheetDialogFragment<B : ViewBinding> : BottomSheetDialogFra
     open fun setupObserver() {}
 
     open fun setupListener() {}
+
+    fun showLoading() {
+        if (!loadingDialog.isShowing) loadingDialog.show()
+    }
+
+    fun hideLoading() {
+        if (loadingDialog.isShowing) loadingDialog.dismiss()
+    }
 }

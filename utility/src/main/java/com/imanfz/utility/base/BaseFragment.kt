@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import com.imanfz.utility.dialog.LoadingDialog
 import com.imanfz.utility.extension.getBinding
 
 /**
@@ -21,6 +22,7 @@ abstract class BaseFragment<B : ViewBinding>: Fragment() {
         )
 
     protected fun requireBinding(): B = requireNotNull(_binding)
+    private lateinit var loadingDialog: LoadingDialog
 
     final override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +35,7 @@ abstract class BaseFragment<B : ViewBinding>: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadingDialog = LoadingDialog(requireContext())
         setupView()
         setupObserver()
         setupListener()
@@ -48,5 +51,14 @@ abstract class BaseFragment<B : ViewBinding>: Fragment() {
     open fun setupObserver() {}
 
     open fun setupListener() {}
+
+    fun showLoading() {
+        if (!loadingDialog.isShowing) loadingDialog.show()
+    }
+
+    fun hideLoading() {
+        if (loadingDialog.isShowing) loadingDialog.dismiss()
+    }
+
 
 }

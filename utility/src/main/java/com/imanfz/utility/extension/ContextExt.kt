@@ -2,17 +2,19 @@ package com.imanfz.utility.extension
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.*
+import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.imanfz.utility.isConnectionOn
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import kotlin.random.Random
 
 /**
@@ -195,4 +197,55 @@ inline fun <reified T: Activity> Context.startActivityClearTop(
             }
         }
     )
+}
+
+fun ContentResolver.getCursorContent(uri: Uri): String? = kotlin.runCatching {
+    query(uri, null, null, null, null)?.use { cursor ->
+        val nameColumnIndex = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+        if (cursor.moveToFirst()) { cursor.getString(nameColumnIndex) } else null
+    }
+}.getOrNull()
+
+fun Context.getFileName(uri: Uri): String? {
+    when(uri.scheme) {
+        ContentResolver.SCHEME_FILE -> {
+            val filePath = uri.path
+            if (!filePath.isNullOrEmpty()) return File(filePath).name
+        }
+        ContentResolver.SCHEME_CONTENT -> return contentResolver.getCursorContent(uri)
+    }
+
+    return null
+}
+
+fun Context.getFileFromAsset(fileName: String): File? {
+    val file = File("$cacheDir/$fileName")
+    if (!file.exists()) try {
+        val buffer = ByteArray(1024)
+        assets.open(fileName).apply {
+            read(buffer)
+            close()
+        }
+
+        FileOutputStream(file).apply {
+            write(buffer)
+            close()
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        return null
+    }
+
+    return file
+}
+
+fun Context.getJsonDataFromAsset(fileName: String): String? {
+    val jsonString: String
+    try {
+        jsonString = assets.open(fileName).bufferedReader().use { it.readText() }
+    } catch (e: IOException) {
+        e.printStackTrace()
+        return null
+    }
+    return jsonString
 }
