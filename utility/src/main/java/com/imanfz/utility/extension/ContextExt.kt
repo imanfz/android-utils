@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.OpenableColumns
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.imanfz.utility.GlideApp
 import com.imanfz.utility.isConnectionOn
 import java.io.File
 import java.io.FileOutputStream
@@ -248,4 +249,17 @@ fun Context.getJsonDataFromAsset(fileName: String): String? {
         return null
     }
     return jsonString
+}
+
+fun Context.clearDiskCache() {
+    // for background thread
+    Thread {
+        kotlin.run {
+            GlideApp.get(applicationContext).clearDiskCache()
+        }
+    }.start()
+}
+
+fun Context.clearMemory() {
+    GlideApp.get(this.applicationContext).clearMemory()
 }

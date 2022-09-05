@@ -11,8 +11,8 @@ import java.util.*
  * Created by Iman Faizal on 21/May/2022
  **/
 
-fun getCurrentDateTime(): String {
-    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+fun getCurrentDateTime(format: String = "dd/MM/yyyy"): String {
+    val dateFormat = SimpleDateFormat(format, Locale.getDefault())
     return dateFormat.format(Calendar.getInstance().time)
 }
 
