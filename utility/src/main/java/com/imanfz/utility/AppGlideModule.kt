@@ -50,7 +50,7 @@ class AppGlideModule: AppGlideModule() {
         return RequestOptions()
             .signature(ObjectKey(signatureDate(DAY)))
 //            .override(200, 200)
-            .placeholder(ContextCompat.getDrawable(context, R.drawable.progress_animation))
+            .placeholder(ContextCompat.getDrawable(context, R.drawable.placeholder_image_loading))
             .error(ContextCompat.getDrawable(context, R.drawable.placeholder_broken_image))
 //            .centerCrop()
             .encodeFormat(Bitmap.CompressFormat.PNG)

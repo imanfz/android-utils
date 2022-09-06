@@ -107,8 +107,8 @@ fun Fragment.delayOnLifecycle(
     duration: Long = 3000,
     dispatcher: CoroutineDispatcher = Dispatchers.Main,
     block: () -> Unit
-): Job? = view?.findViewTreeLifecycleOwner()?.let { lifecycleOwner ->
-    lifecycleOwner.lifecycle.coroutineScope.launch(dispatcher) {
+) {
+    viewLifecycleOwner.lifecycle.coroutineScope.launch(dispatcher) {
         delay(duration)
         block()
     }

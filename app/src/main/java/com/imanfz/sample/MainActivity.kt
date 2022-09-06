@@ -14,7 +14,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             imageView.loadImage("https://picsum.photos/id/1039/6945/4635")
             btnLoading.setSafeOnClickListener {
                 showLoading()
-                delayOnLifecycle(3000) {
+                delayOnLifecycle() {
+                    logi("dismiss")
                     hideLoading()
                 }
             }
