@@ -6,6 +6,9 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Window
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import com.imanfz.utility.R
 
 /**
@@ -16,6 +19,8 @@ class LoadingDialog(
     context: Context
 ) : Dialog(context) {
 
+    private lateinit var iv: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -23,6 +28,14 @@ class LoadingDialog(
 //        window?.setDimAmount(0F)
         setContentView(R.layout.fragment_loading_dialog)
         setCancelable(false)
+        iv = findViewById(R.id.loading)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        iv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.spinner_animation).apply {
+            repeatCount = Animation.INFINITE
+        })
     }
 
 }

@@ -19,8 +19,10 @@ const val ITEM_VIEW_TYPE_ITEM = 1
 
 fun RecyclerView.setup(
     mLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context),
+    isNestedScroll: Boolean = false
 ) {
     setHasFixedSize(true)
+    isNestedScrollingEnabled = isNestedScroll
     layoutManager = mLayoutManager
 }
 

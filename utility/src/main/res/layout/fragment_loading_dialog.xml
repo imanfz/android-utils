@@ -8,12 +8,11 @@
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp">
 
-    <ProgressBar
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/loading"
-        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateDrawable="@drawable/default_spinner"
+        android:src="@drawable/ic_spinner"
         android:layout_margin="@dimen/big_margin"/>
 
 </androidx.cardview.widget.CardView>
