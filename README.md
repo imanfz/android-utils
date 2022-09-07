@@ -45,6 +45,13 @@
 
 ## How to use
 
+### Now migrate to maven central
+```gradle
+dependencies {
+    implementation 'io.github.imanfz:android-utils:{latest version}'
+}
+```
+
 Add it to your build.gradle with:
 ```gradle
 allprojects {

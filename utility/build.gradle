@@ -57,3 +57,21 @@ dependencies {
     // QR Code Scanner
     implementation 'com.github.yuriy-budiyev:code-scanner:2.3.2'
 }
+
+ext {
+    PUBLISH_GROUP_ID = 'io.github.imanfz'
+    PUBLISH_VERSION = '0.2.2'
+    PUBLISH_ARTIFACT_ID = 'android-utils'
+    PUBLISH_DESCRIPTION = 'Utilty for Android with ViewBinding'
+    PUBLISH_URL = 'https://github.com/imanfz/android-utils'
+    PUBLISH_LICENSE_NAME = 'MIT License'
+    PUBLISH_LICENSE_URL = 'https://github.com/imanfz/android-utils/blob/master/LICENSE.md'
+    PUBLISH_DEVELOPER_ID = 'imanfz'
+    PUBLISH_DEVELOPER_NAME = 'Iman Faizal'
+    PUBLISH_DEVELOPER_EMAIL = 'imanfz1103@gmail.com'
+    PUBLISH_SCM_CONNECTION = 'scm:git:github.com/imanfz/android-utils.git'
+    PUBLISH_SCM_DEVELOPER_CONNECTION = 'scm:git:ssh://github.com/imanfz/android-utils.git'
+    PUBLISH_SCM_URL = 'https://github.com/imanfz/android-utils/tree/master'
+}
+
+apply from: "${rootProject.projectDir}/scripts/publish-module.gradle"
