@@ -15,4 +15,6 @@
     <string name="error_please_try_again">An error occurred, please try again</string>
     <string name="need_permission">Need permission</string>
     <string name="error_decoding_qr">QR Code decoding error, Please choose the correct QR Code image!</string>
+    <string name="read_more">Read More</string>
+    <string name="read_less">Read Less</string>
 </resources>

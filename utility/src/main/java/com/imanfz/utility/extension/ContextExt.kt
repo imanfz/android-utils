@@ -11,11 +11,13 @@ import android.os.Bundle
 import android.provider.OpenableColumns
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import com.imanfz.utility.GlideApp
 import com.imanfz.utility.isConnectionOn
 import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.random.Random
 
 /**
@@ -219,26 +221,16 @@ fun Context.getFileName(uri: Uri): String? {
     return null
 }
 
-fun Context.getFileFromAsset(fileName: String): File? {
-    val file = File("$cacheDir/$fileName")
-    if (!file.exists()) try {
-        val buffer = ByteArray(1024)
-        assets.open(fileName).apply {
-            read(buffer)
-            close()
+fun Context.getFileFromAsset(fileName: String): File = File(cacheDir, fileName)
+    .also {
+        if (!it.exists()) {
+            it.outputStream().use { cache ->
+                assets.open(fileName).use { inputStream ->
+                    inputStream.copyTo(cache)
+                }
+            }
         }
-
-        FileOutputStream(file).apply {
-            write(buffer)
-            close()
-        }
-    } catch (e: Exception) {
-        e.printStackTrace()
-        return null
     }
-
-    return file
-}
 
 fun Context.getJsonDataFromAsset(fileName: String): String? {
     val jsonString: String
@@ -249,6 +241,71 @@ fun Context.getJsonDataFromAsset(fileName: String): String? {
         return null
     }
     return jsonString
+}
+
+fun Context.openFile(file: File) {
+    val uri = FileProvider.getUriForFile(
+        this,
+        applicationContext.packageName.toString() + ".provider",
+        file
+    )
+    val intent = Intent(Intent.ACTION_VIEW)
+
+    file.toString().apply {
+        if (contains(".doc") || contains(".docx")) {
+            // Word document
+            intent.setDataAndType(uri, "application/msword")
+        } else if (contains(".pdf")) {
+            // PDF file
+            intent.setDataAndType(uri, "application/pdf")
+        } else if (contains(".ppt") || file.toString().contains(".pptx")) {
+            // Powerpoint file
+            intent.setDataAndType(uri, "application/vnd.ms-powerpoint")
+        } else if (contains(".xls") || contains(".xlsx")) {
+            // Excel file
+            intent.setDataAndType(uri, "application/vnd.ms-excel")
+        }  else if (contains(".rtf")) {
+            // RTF file
+            intent.setDataAndType(uri, "application/rtf")
+        } else if (contains(".wav") || contains(".mp3")) {
+            // WAV audio file
+            intent.setDataAndType(uri, "audio/x-wav")
+        } else if (contains(".gif")) {
+            // GIF file
+            intent.setDataAndType(uri, "image/gif")
+        } else if (contains(".jpg") || contains(".jpeg") || contains(".png")) {
+            // JPG file
+            intent.setDataAndType(uri, "image/jpeg")
+        } else if (contains(".txt")) {
+            // Text file
+            intent.setDataAndType(uri, "text/plain")
+        } else if (contains(".zip") || contains(".rar")) {
+            intent.setDataAndType(uri, "application/zip")
+        }  else if (contains(".apk")) {
+            intent.setDataAndType(uri, "application/vnd.android")
+        } else if (contains(".3gp") || contains(".mpg") ||
+            contains(".mpeg") || contains(".mpe") ||
+            contains(".mp4") || contains(".avi")
+        ) {
+            // Video files
+            intent.setDataAndType(uri, "video/*")
+        } else {
+            //if you want you can also define the intent type for any other file
+            //additionally use else clause below, to manage other unknown extensions
+            //in this case, Android will show all applications installed on the device
+            //so you can choose which application to use
+            intent.setDataAndType(uri, "*/*")
+        }
+    }
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+    intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+    try {
+        startActivity(intent)
+    } catch (e: ActivityNotFoundException) {
+        loge("open file error: ${e.localizedMessage}")
+        longToast("No handler for this type of file.")
+    }
 }
 
 fun Context.clearDiskCache() {
@@ -262,4 +319,27 @@ fun Context.clearDiskCache() {
 
 fun Context.clearMemory() {
     GlideApp.get(this.applicationContext).clearMemory()
+}
+
+fun Context.getDateDifference(
+    calendar: Calendar
+): String {
+    val d = calendar.time
+    val lastMonth = Calendar.getInstance()
+    val lastWeek = Calendar.getInstance()
+    val recent = Calendar.getInstance()
+
+    lastMonth.add(Calendar.DAY_OF_MONTH, -Calendar.DAY_OF_MONTH)
+    lastWeek.add(Calendar.DAY_OF_MONTH, -7)
+    recent.add(Calendar.DAY_OF_MONTH, -2)
+
+    return if (calendar.before(lastMonth)) {
+        SimpleDateFormat("MMMM", Locale.getDefault()).format(d)
+    } else if (calendar.after(lastMonth) && calendar.before(lastWeek)) {
+        "Last Month"
+    } else if (calendar.after(lastWeek) && calendar.before(recent)) {
+        "Last Week"
+    } else {
+        "Recent"
+    }
 }

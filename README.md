@@ -18,8 +18,10 @@
 - Dialog
   - [LoadingDialog](#loadingdialog)
   - [QRISDialog](#qrisdialog)
+  - [ImageViewerDialog](#imageviewerdialog)
 - Extension
   - [ActivityExt](#activityext)
+  - [BitmapExt](#bitmapext)
   - [ContextExt](#contextext)
   - [DateExt]
   - [EditTextExt](#edittextext)
@@ -32,6 +34,8 @@
   - [ViewBindingExt](#viewbindingext)
   - [ViewExt](#viewext)
   - [UriExt]
+- Custom UI
+  - [ReadMoreTextView](#readmoretextview)
 - Utils
   - [AppUpdateUtils](#appupdateutils)
   - [DateUtils](#dateutils)
@@ -51,8 +55,8 @@ dependencies {
     implementation 'io.github.imanfz:android-utils:{latest version}'
 }
 ```
-
-Add it to your build.gradle with:
+### Jitpack
+if you use with jipack dd it to your build.gradle with:
 ```gradle
 allprojects {
     repositories {
@@ -67,6 +71,9 @@ dependencies {
     implementation 'com.github.imanfz:android-utils:{latest version}'
 }
 ```
+
+
+## Base
 ### [BaseActivity](#baseActivity)
 ```
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -96,6 +103,13 @@ or if you have custom BaseFragment, you can extends it:
 class BaseFragment<B : ViewBinding> : BaseFragment<B>() {
     ...
 }
+```
+
+## Dialog
+### [ImageViewerDialog](#imageviewerdialog)
+```
+  val image = url or uri.toString()
+  ImageViewerDialog.newInstance(image).show(supportFragmentManager, tag)
 ```
 ### [LoadingDialog](#loadingdialog)
 ```
@@ -127,6 +141,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 }
 ```
+
+## Extension
 ### [ActivityExt](#activityext)
 ```
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -476,6 +492,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 }
 ```
+
+## Custom UI
+### [ReadMoreTextView](#readmoretextview)
+in layout
+```
+     <com.imanfz.utility.ui.ReadMoreTextView
+        android:id="@+id/readMoreTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:readMoreText="Show" // default Read More
+        app:readMoreTextColor="@color/colorPrimary" // default readmore_color
+        app:readMoreMaxLine="2" // default 4
+        android:text="testsfsf sfks\nsfsfsf\nsfjfsjsfj\njsfjs oke bos"
+```
+
+## Utility
 ### [DateUtils](#dateutils)
 ```
 getCurrentDateTime() // date

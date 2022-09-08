@@ -1,5 +1,7 @@
 package com.imanfz.utility.extension
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.imanfz.utility.common.SafeClickListener
@@ -66,4 +68,30 @@ fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
         onSafeClick(it)
     }
     setOnClickListener(safeClickListener)
+}
+
+fun View.showAnimateX(duration: Long = 200) {
+    this.animate()
+        .translationX(0F)
+        .alpha(1.0F)
+        .setDuration(duration)
+        .setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                super.onAnimationEnd(animation)
+                this@showAnimateX.visible()
+            }
+        })
+}
+
+fun View.hideAnimateX(duration: Long = 200) {
+    this.animate()
+        .translationX(this.width.toFloat())
+        .alpha(0.0F)
+        .setDuration(duration)
+        .setListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                super.onAnimationEnd(animation)
+                this@hideAnimateX.gone()
+            }
+        })
 }

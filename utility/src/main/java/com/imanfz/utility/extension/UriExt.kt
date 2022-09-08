@@ -1,6 +1,7 @@
 package com.imanfz.utility.extension
 
 import android.content.Context
+import android.media.MediaMetadataRetriever
 import android.net.Uri
 import java.io.*
 
@@ -41,5 +42,32 @@ fun Uri.createFile(context: Context, dir: String, filename: String) {
         inputStream?.close()
         outputStream?.close()
     }
+}
+
+fun Uri.getAudioDuration(context: Context) : String? {
+    val retriever = MediaMetadataRetriever()
+    try {
+        retriever.setDataSource(context, this)
+    } catch (e: RuntimeException) {
+        loge("Cannot retrieve audio file ${e.localizedMessage}")
+    }
+    val metadataDurationValue = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
+    return if(metadataDurationValue != null && !metadataDurationValue.isBlank()) {
+        (Integer.parseInt(metadataDurationValue) / 1000).formatSecondsTime()
+    }else{
+        0.formatSecondsTime()
+    }
+}
+
+fun Uri.isExternalStorageDocument(): Boolean {
+    return "com.android.externalstorage.documents" == authority
+}
+
+fun Uri.isDownloadsDocument(): Boolean {
+    return "com.android.providers.downloads.documents" == authority
+}
+
+fun Uri.isMediaDocument(): Boolean {
+    return "com.android.providers.media.documents" == authority
 }
 

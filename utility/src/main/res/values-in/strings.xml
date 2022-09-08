@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_app_failed">Update aplikasi gagal!</string>
+    <string name="restart">Mulai Ulang</string>
+    <string name="update_downloaded">Aplikasi baru saja mengunduh pembaruan</string>
+    <string name="update_cancelled">Update aplikasi dibatalkan</string>
+    <string name="try_update">Coba Lagi</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Batal</string>
+    <string name="close">Tutup</string>
+    <string name="failed">Gagal</string>
+    <string name="read_write_required">Izin Penyimpanan Baca/Tulis diperlukan untuk melakukan tugas tersebut.</string>
+    <string name="camera_required">Izin kamera diperlukan untuk melakukan tugas tersebut.</string>
+    <string name="result_not_found">Hasil Tidak Ditemukan</string>
+    <string name="error_please_try_again">Terjadi kesalahan, silakan coba lagi</string>
+    <string name="need_permission">Butuh izin</string>
+    <string name="error_decoding_qr">Kesalahan decoding Kode QR, Silakan pilih gambar Kode QR yang benar!</string>
+    <string name="read_more">Baca Selengkapnya</string>
+    <string name="read_less">Baca Lebih Sedikit</string>
+</resources>

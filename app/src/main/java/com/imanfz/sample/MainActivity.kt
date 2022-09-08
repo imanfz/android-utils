@@ -4,6 +4,7 @@ import com.imanfz.sample.databinding.ActivityMainBinding
 import com.imanfz.utility.base.BaseActivity
 import com.imanfz.utility.dialog.QRISDialog
 import com.imanfz.utility.extension.*
+import com.imanfz.utility.ui.ReadMoreTextView
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun setupView() {
@@ -22,6 +23,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             btnQris.setSafeOnClickListener {
                 QRISDialog().apply {
                     show(supportFragmentManager, TAG)
+                }
+            }
+            readMoreTextView.changeListener = object : ReadMoreTextView.ChangeListener {
+                override fun onStateChange(state: ReadMoreTextView.State) {
+                    logd("ReadMoreTextView: $state")
                 }
             }
         }

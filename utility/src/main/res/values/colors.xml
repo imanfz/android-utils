@@ -123,4 +123,6 @@
     <color name="greenPrimary">#199E0D</color>
 
     <color name="shimmerPlaceholder">#E6E6E6</color>
+
+    <color name="read_more">#869ab7</color>
 </resources>
