@@ -60,7 +60,7 @@ dependencies {
 
 ext {
     PUBLISH_GROUP_ID = 'io.github.imanfz'
-    PUBLISH_VERSION = '0.2.2'
+    PUBLISH_VERSION = '0.2.3'
     PUBLISH_ARTIFACT_ID = 'android-utils'
     PUBLISH_DESCRIPTION = 'Utilty for Android with ViewBinding'
     PUBLISH_URL = 'https://github.com/imanfz/android-utils'

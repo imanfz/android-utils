@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/big_margin"
         app:readMoreMaxLine="2"
-        app:readMoreColor=""
+        app:readMoreColor="@color/bluePrimary"
         android:text="testsfsf sfks\nsfsfsf\nsfjfsjsfj\njsfjs oke bos"
         app:layout_constraintTop_toBottomOf="@id/btn_qris"/>
 
