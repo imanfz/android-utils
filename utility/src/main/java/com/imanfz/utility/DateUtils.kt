@@ -2,8 +2,6 @@ package com.imanfz.utility
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.widget.TextView
-import com.imanfz.utility.extension.setSafeOnClickListener
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -20,23 +18,23 @@ fun getCurrentDateTimeMils(): Long {
     return System.currentTimeMillis()
 }
 
-fun showDatePicker(context: Context, textView: TextView) {
+fun showDatePicker(
+    context: Context,
+    onSelected: (date: String) -> Unit
+) {
     val calendar = Calendar.getInstance()
-    val year = calendar.get(Calendar.YEAR)
-    val month = calendar.get(Calendar.MONTH)
-    val day = calendar.get(Calendar.DAY_OF_MONTH)
-    textView.setSafeOnClickListener {
-        val datePickerDialog = DatePickerDialog(
-            context,
-            { _, year, monthOfYear, dayOfMonth ->
-                textView.text = formatDate(year, monthOfYear, dayOfMonth)
-            },
-            year,
-            month,
-            day
-        )
-        datePickerDialog.show()
-    }
+    val years = calendar.get(Calendar.YEAR)
+    val months = calendar.get(Calendar.MONTH)
+    val days = calendar.get(Calendar.DAY_OF_MONTH)
+    DatePickerDialog(
+        context,
+        { _, year, monthOfYear, dayOfMonth ->
+            onSelected(formatDate(year, monthOfYear, dayOfMonth))
+        },
+        years,
+        months,
+        days
+    ).show()
 }
 
 fun formatDate(year:Int, month:Int, day:Int):String{

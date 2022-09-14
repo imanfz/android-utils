@@ -40,12 +40,15 @@
   - [AppUpdateUtils](#appupdateutils)
   - [DateUtils](#dateutils)
   - [DeviceUtils](#deviceutils)
+  - [DiffUtils](#diffutils)
   - [MetricsUtils](#metricsutils)
   - [NetworkUtils](#networkutils)
   - [RootUtils](#rootutils)
   - [ShimmerUtils](#shimmerutils)
   - [ValidationFrom](#validationform)
   - [ViewPagerUtils](#viewpagerutils)
+- Other
+  - [RecyclerViewEndlessScrollListener]
 
 ## How to use
 
@@ -512,7 +515,9 @@ in layout
 ```
 getCurrentDateTime() // date
 getCurrentDateTimeMils() // long
-showDatePicker(context: Context, textView: TextView) // textview for view on clicked
+showDatePicker(context: Context) { date -> // string return
+  ...
+}
 ```
 ### [DeviceUtils](#deviceutils)
 ```
@@ -524,6 +529,26 @@ getDeviceOSCode()
 getDeviceOSName()
 getDeviceTimeZone()
 getDeviceLanguage()
+```
+### [DiffUtils](#diffutils)
+mandatory, your model class extend the BaseModel. The detail base model is:
+```
+interface BaseModel {
+    fun contains(someValue: String): Boolean = false
+    fun isItemSameWith(value: BaseModel): Boolean = false
+    fun isContentSameWith(value: BaseModel): Boolean = false
+}
+```
+and how to use it
+```
+@Parcelize
+data class Example(
+  ...
+  ...
+): Parcelable, BaseModel
+```
+```
+ItemDiffCallback<Example>()
 ```
 ### [MetricsUtils](#metricsutils)
 ```

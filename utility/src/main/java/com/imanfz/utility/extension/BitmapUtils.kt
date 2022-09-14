@@ -41,3 +41,28 @@ fun Bitmap.convertBitmapToFile(destinationFile: File?, quality:Int = 70) {
     fos.flush()
     fos.close()
 }
+
+fun Bitmap.resizeWithRatio(maxLength: Int): Bitmap {
+    return try {
+        val targetWidth: Int
+        val targetHeight: Int
+        if (width > height) {
+            if (width < maxLength) return this
+
+            val ratio = height.toDouble() / width.toDouble()
+            targetWidth = maxLength
+            targetHeight = (maxLength * ratio).toInt()
+        } else {
+            if (height < maxLength) return this
+
+            val ratio = width.toDouble() / height.toDouble()
+            targetHeight = maxLength
+            targetWidth = (maxLength * ratio).toInt()
+        }
+
+        Bitmap.createScaledBitmap(this, targetWidth, targetHeight, false)
+    } catch (ex: Exception) {
+        ex.printStackTrace()
+        this
+    }
+}
