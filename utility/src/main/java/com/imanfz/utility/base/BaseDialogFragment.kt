@@ -49,11 +49,11 @@ open class BaseDialogFragment<B : ViewBinding> : DialogFragment() {
 
     open fun setupListener() {}
 
-    fun showLoading() {
+    open fun showLoading() {
         if (!loadingDialog.isShowing) loadingDialog.show()
     }
 
-    fun hideLoading() {
+    open fun hideLoading() {
         if (loadingDialog.isShowing) loadingDialog.dismiss()
     }
 }

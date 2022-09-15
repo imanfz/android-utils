@@ -1,5 +1,6 @@
 package com.imanfz.utility.extension
 
+import android.graphics.Bitmap
 import android.net.Uri
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
@@ -36,6 +37,12 @@ fun ImageView.loadImage(drawableId: Int) {
         .into(this)
 }
 
+fun ImageView.loadImage(bitmap: Bitmap) {
+    GlideApp.with(this)
+        .load(bitmap)
+        .into(this)
+}
+
 fun ImageView.loadCircleImage(url: String) {
     GlideApp.with(this)
         .load(url)
@@ -63,6 +70,15 @@ fun ImageView.loadCircleImage(drawableId: Int) {
         .into(this)
 }
 
+fun ImageView.loadCircleImage(bitmap: Bitmap) {
+    GlideApp.with(this)
+        .load(bitmap)
+        .apply(
+            RequestOptions.circleCropTransform()
+        )
+        .into(this)
+}
+
 fun ImageView.loadRoundedImage(url: String, radius: Int = 10) {
     GlideApp.with(this)
         .load(url)
@@ -80,6 +96,13 @@ fun ImageView.loadRoundedImage(uri: Uri, radius: Int = 10) {
 fun ImageView.loadRoundedImage(drawableId: Int, radius: Int = 10) {
     GlideApp.with(this)
         .load(drawableId)
+        .transform(CenterCrop(), RoundedCorners(radius))
+        .into(this)
+}
+
+fun ImageView.loadRoundedImage(bitmap: Bitmap, radius: Int = 10) {
+    GlideApp.with(this)
+        .load(bitmap)
         .transform(CenterCrop(), RoundedCorners(radius))
         .into(this)
 }

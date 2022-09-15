@@ -47,6 +47,7 @@
   - [ViewPagerUtils](#viewpagerutils)
 - Other
   - [RecyclerViewEndlessScrollListener]
+  - [AppPrefs](#appprefs)
 
 ## How to use
 
@@ -582,6 +583,32 @@ isMatchPassword(password: String, confirmPassword: String, textInputLayout: Text
 ```
 DepthPageTransformer()
 ZoomOutPageTransformer()
+```
+
+## Other
+- [AppPrefs](#appprefs)
+```
+putIsLogin(value: Boolean)
+isLogin(): Boolean
+putFirstTimeLaunch(value: Boolean)
+isFirstTimeLaunch(): Boolean
+isFirstLogin(): Boolean
+putIsFirstLogin(value: Boolean)
+putString(key: String, text: String)
+getString(key: String): String
+putInt(key: String, value: Int)
+getInt(key: String): Int
+clear()
+// model
+put(UserModel(), USER_KEY)
+get<UserModel>(USER_KEY) // nullable
+
+// list model
+putList(listUserModel, LIST_KEY)
+geListt<UserModel>(LIST_KEY)
+
+putInitialNameAvatar(bitmap: Bitmap)
+getInitialNameAvatar(): Bitmap?
 ```
 
 ![](https://img.shields.io/badge/Android_Studio-3DDC84?style=for-the-badge&logo=android-studio&logoColor=white) ![](https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white)
