@@ -1,6 +1,7 @@
-package com.imanfz.utility.extension
+package com.imanfz.utility
 
 import android.graphics.*
+import com.imanfz.utility.extension.logd
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream

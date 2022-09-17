@@ -7,4 +7,20 @@
         <attr name="readMoreColor" format="color|reference" />
     </declare-styleable>
 
+    <declare-styleable name="LoadingButton">
+        <attr name="lb_buttonColor" format="color" />
+        <attr name="lb_loaderColor" format="color" />
+        <attr name="lb_shadowColor" format="color" />
+        <attr name="lb_strokeColor" format="color" />
+        <attr name="lb_cornerRadius" format="dimension" />
+        <attr name="lb_shadowHeight" format="dimension" />
+        <attr name="lb_loaderWidth" format="dimension" />
+        <attr name="lb_loaderMargin" format="dimension" />
+        <attr name="lb_strokeWidth" format="dimension" />
+        <attr name="lb_isShadowEnable" format="boolean" />
+        <attr name="lb_isStrokeEnable" format="boolean" />
+        <attr name="lb_isLoading" format="boolean" />
+
+    </declare-styleable>
+
 </resources>

@@ -27,6 +27,7 @@
   - [IntegerExt](#integerext)
   - [ImageExt](#imageext)
   - [LogExt](#logext)
+  - [NavigationExt](#navigationext)
   - [RecyclerViewExt](#recyclerviewext)
   - [StringExt](#stringext)
   - [ViewBindingExt](#viewbindingext)
@@ -34,6 +35,7 @@
   - [UriExt]
 - Custom UI
   - [ReadMoreTextView](#readmoretextview)
+  - [LoadingButton](#loadingbutton)
 - Utils
   - [AppUpdateUtils](#appupdateutils)
   - [DateUtils](#dateutils)
@@ -346,6 +348,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 }
 ```
+### [NavigationExt](#navigationext)
+```
+safeNavigate
+```
 ### [RecyclerViewExt](#recyclerviewext)
 ```
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -491,6 +497,40 @@ in layout
         app:readMoreTextColor="@color/colorPrimary" // default readmore_color
         app:readMoreMaxLine="2" // default 4
         android:text="testsfsf sfks\nsfsfsf\nsfjfsjsfj\njsfjs oke bos"
+```
+### [LoadingButton](#loadingbutton)
+in layout
+```
+ <com.imanfz.utility.ui.LoadingButton
+        android:id="@+id/loading_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Loading Button"
+        android:textColor="#ffffff"
+        app:lb_buttonColor="@color/bluePrimaryDark"
+        app:lb_loaderColor="@color/redPrimary"
+        app:lb_loaderWidth="2dp"
+        app:lb_loaderMargin="8dp"
+        app:lb_isLoading="true"
+        app:lb_cornerRadius="12dp"
+        app:lb_isShadowEnable="false"
+        app:lb_shadowColor="@color/yellowPrimary"
+        app:lb_shadowHeight="2dp"
+        app:lb_isStrokeEnable="true"
+        app:lb_strokeWidth="2dp"
+        app:lb_strokeColor="@color/redPrimary" />
+```
+
+in activity/fragment
+```
+loadingButton.apply {
+    setSafeOnClickListener {
+        showLoading()
+        delayOnLifecycle {
+            hideLoading()
+        }
+    }
+}
 ```
 
 ## Utility

@@ -76,7 +76,7 @@ fun View.showAnimateX(duration: Long = 200) {
         .alpha(1.0F)
         .setDuration(duration)
         .setListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 this@showAnimateX.visible()
             }
@@ -89,7 +89,7 @@ fun View.hideAnimateX(duration: Long = 200) {
         .alpha(0.0F)
         .setDuration(duration)
         .setListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
+            override fun onAnimationEnd(animation: Animator) {
                 super.onAnimationEnd(animation)
                 this@hideAnimateX.gone()
             }

@@ -15,7 +15,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             imageView.loadImage("https://picsum.photos/id/1039/6945/4635")
             btnLoading.setSafeOnClickListener {
                 showLoading()
-                delayOnLifecycle() {
+                delayOnLifecycle {
                     logi("dismiss")
                     hideLoading()
                 }
@@ -28,6 +28,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             readMoreTextView.changeListener = object : ReadMoreTextView.ChangeListener {
                 override fun onStateChange(state: ReadMoreTextView.State) {
                     logd("ReadMoreTextView: $state")
+                }
+            }
+            loadingButton.apply {
+                setSafeOnClickListener {
+                    showLoading()
+                    delayOnLifecycle {
+                        hideLoading()
+                    }
                 }
             }
         }

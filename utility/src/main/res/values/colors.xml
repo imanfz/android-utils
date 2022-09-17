@@ -125,4 +125,16 @@
     <color name="shimmerPlaceholder">#E6E6E6</color>
 
     <color name="read_more">#869ab7</color>
+
+    <!-- LoadingButton  -->
+    <color name="unpressed_color">#fff44336</color>
+    <color name="pressed_color">#ffd32f2f</color>
+    <color name="ripple_color">#ffeeeeee</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFF</color>
+    <color name="Black">#000</color>
+    <color name="fbutton_default_color">#ff3eadeb</color>
+    <color name="fbutton_progress_color">#ff3eadeb</color>
+    <color name="fbutton_default_shadow_color">#ff3493c8</color>
+    <color name="fbutton_default_stroke_color">#A5A5A5</color>
 </resources>
