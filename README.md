@@ -3,6 +3,10 @@
 [![](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/iman-faizal) [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/imanfz)
 
 ![](https://img.shields.io/badge/Freelancer-29B2FE?style=for-the-badge&logo=Freelancer&logoColor=white) ![](https://img.shields.io/badge/Apple%20laptop-333333?style=for-the-badge&logo=apple&logoColor=white)
+
+## Preview
+![enter image description here](https://github.com/imanfz/android-utils/blob/master/images/preview.gif)
+
 ## Feature
 - Adapter
   - [TabPagerAdapter]
