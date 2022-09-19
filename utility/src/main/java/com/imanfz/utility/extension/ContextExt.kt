@@ -9,9 +9,12 @@ import android.graphics.*
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
+import android.view.ContextThemeWrapper
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.imanfz.utility.GlideApp
 import com.imanfz.utility.isConnectionOn
 import java.io.File
@@ -341,5 +344,13 @@ fun Context.getDateDifference(
         "Last Week"
     } else {
         "Recent"
+    }
+}
+
+fun Context.addLifecycleObserver(observer: LifecycleObserver) {
+    when (this) {
+        is LifecycleOwner -> this.lifecycle.addObserver(observer)
+        is ContextThemeWrapper -> this.baseContext.addLifecycleObserver(observer)
+        is androidx.appcompat.view.ContextThemeWrapper -> this.baseContext.addLifecycleObserver(observer)
     }
 }

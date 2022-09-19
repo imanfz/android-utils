@@ -1,5 +1,6 @@
 package com.imanfz.sample
 
+import android.content.Intent
 import com.imanfz.sample.databinding.ActivityMainBinding
 import com.imanfz.utility.base.BaseActivity
 import com.imanfz.utility.dialog.QRISDialog
@@ -37,6 +38,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                         hideLoading()
                     }
                 }
+            }
+            loadingButton2.apply {
+                setSafeOnClickListener {
+                    showLoading()
+                    delayOnLifecycle {
+                        hideLoading()
+                    }
+                }
+            }
+            btnMove.setSafeOnClickListener {
+                startActivity(Intent(this@MainActivity, SecondActivity::class.java))
             }
         }
     }

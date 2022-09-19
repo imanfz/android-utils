@@ -109,6 +109,7 @@
 
     <color name="blackPrimary">#FF000000</color>
     <color name="blackTransparent40">#66000000</color>
+    <color name="blackTransparent20">#33000000</color>
 
     <color name="whitePrimary">#FFFFFFFF</color>
     <color name="whiteTransparent40">#66FFFFFF</color>

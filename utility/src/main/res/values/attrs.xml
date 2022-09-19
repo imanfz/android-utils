@@ -19,6 +19,7 @@
         <attr name="lb_strokeWidth" format="dimension" />
         <attr name="lb_isShadowEnable" format="boolean" />
         <attr name="lb_isStrokeEnable" format="boolean" />
+        <attr name="lb_isCircular" format="boolean" />
         <attr name="lb_isLoading" format="boolean" />
 
     </declare-styleable>

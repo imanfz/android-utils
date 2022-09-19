@@ -503,7 +503,7 @@ in layout
 ```
  <com.imanfz.utility.ui.LoadingButton
         android:id="@+id/loading_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Loading Button"
         android:textColor="#ffffff"
@@ -511,8 +511,9 @@ in layout
         app:lb_loaderColor="@color/redPrimary"
         app:lb_loaderWidth="2dp"
         app:lb_loaderMargin="8dp"
-        app:lb_isLoading="true"
-        app:lb_cornerRadius="12dp"
+        app:lb_isLoading="false"
+        app:lb_cornerRadius="8dp"
+        app:lb_isCircular="false"
         app:lb_isShadowEnable="false"
         app:lb_shadowColor="@color/yellowPrimary"
         app:lb_shadowHeight="2dp"

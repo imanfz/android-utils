@@ -45,27 +45,52 @@
         android:text="testsfsf sfks\nsfsfsf\nsfjfsjsfj\njsfjs oke bos"
         app:layout_constraintTop_toBottomOf="@id/btn_qris"/>
 
-
     <com.imanfz.utility.ui.LoadingButton
         android:id="@+id/loading_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Loading Button"
         android:textColor="#ffffff"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
         android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="50dp"
         app:lb_buttonColor="@color/bluePrimaryDark"
         app:lb_loaderColor="@color/redPrimary"
-        app:lb_loaderWidth="2dp"
+        app:lb_loaderWidth="3dp"
         app:lb_loaderMargin="8dp"
+        app:lb_isCircular="true"
         app:lb_isLoading="false"
-        app:lb_cornerRadius="12dp"
-        app:lb_isShadowEnable="false"
-        app:lb_shadowColor="@color/yellowPrimary"
-        app:lb_shadowHeight="2dp"
         app:lb_isStrokeEnable="true"
         app:lb_strokeWidth="2dp"
         app:lb_strokeColor="@color/redPrimary"
         app:layout_constraintTop_toBottomOf="@id/readMoreTextView"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <com.imanfz.utility.ui.LoadingButton
+        android:id="@+id/loading_button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shadow Loading Button"
+        android:textColor="#ffffff"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="50dp"
+        app:lb_buttonColor="@color/bluePrimary"
+        app:lb_loaderColor="@color/redPrimary"
+        app:lb_loaderWidth="3dp"
+        app:lb_loaderMargin="8dp"
+        app:lb_cornerRadius="8dp"
+        app:lb_isShadowEnable="true"
+        app:lb_shadowHeight="2dp"
+        app:layout_constraintTop_toBottomOf="@id/loading_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_move"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Second Activity"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

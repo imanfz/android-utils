@@ -95,3 +95,15 @@ fun View.hideAnimateX(duration: Long = 200) {
             }
         })
 }
+
+fun View.updateWidth(width: Int) {
+    val layoutParams = this.layoutParams
+    layoutParams.width = width
+    this.layoutParams = layoutParams
+}
+
+fun View.updateHeight(height: Int) {
+    val layoutParams = this.layoutParams
+    layoutParams.height = height
+    this.layoutParams = layoutParams
+}
