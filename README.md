@@ -126,9 +126,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     ...
     binding.apply {
         btnQris.setSafeOnClickListener {
-           QRISDialog().apply {
-              show(supportFragmentManager, TAG)
-           }
+           QRISDialog.newInstance { result ->
+               shortToast("QRIS: $result")
+           }.show(supportFragmentManager, TAG)
         }
     }
 }

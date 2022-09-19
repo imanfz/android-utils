@@ -36,7 +36,10 @@ import java.io.InputStream
  * Created by Iman Faizal on 31/Aug/2022
  **/
 
-class QRISDialog: BaseDialogFragment<FragmentQrisDialogBinding>() {
+@Suppress("unused")
+class QRISDialog(
+    private val onResult: ((value: String) -> Unit)
+): BaseDialogFragment<FragmentQrisDialogBinding>() {
 
     private val listPermission = listOf(
         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -46,6 +49,15 @@ class QRISDialog: BaseDialogFragment<FragmentQrisDialogBinding>() {
     private lateinit var permissionResultLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var resultLauncherGallery: ActivityResultLauncher<Intent>
     private lateinit var codeScanner: CodeScanner
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance(
+            onResult: ((value: String) -> Unit)
+        ) = QRISDialog(onResult)
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -80,9 +92,7 @@ class QRISDialog: BaseDialogFragment<FragmentQrisDialogBinding>() {
         super.onPause()
     }
 
-    override fun getTheme(): Int {
-        return R.style.DialogFullscreenTheme
-    }
+    override fun getTheme(): Int = R.style.DialogFullscreenTheme
 
     private fun setupResultLauncher() {
         permissionResultLauncher = registerForActivityResult(
@@ -142,7 +152,7 @@ class QRISDialog: BaseDialogFragment<FragmentQrisDialogBinding>() {
                 isFlashEnabled = false
                 setDecodeCallback {
                     requireActivity().runOnUiThread {
-                        requireContext().shortToast("QR: " + it.text)
+                        onResult(it.text)
                         dismiss()
                     }
                 }

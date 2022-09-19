@@ -2,6 +2,8 @@ package com.imanfz.sample
 
 import android.content.Intent
 import com.imanfz.sample.databinding.ActivityMainBinding
+import com.imanfz.utility.NetworkStatus
+import com.imanfz.utility.NetworkStatusUtils
 import com.imanfz.utility.base.BaseActivity
 import com.imanfz.utility.dialog.QRISDialog
 import com.imanfz.utility.extension.*
@@ -22,9 +24,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 }
             }
             btnQris.setSafeOnClickListener {
-                QRISDialog().apply {
-                    show(supportFragmentManager, TAG)
-                }
+                QRISDialog.newInstance { result ->
+                    shortToast("QRIS: $result")
+                }.show(supportFragmentManager, TAG)
             }
             readMoreTextView.changeListener = object : ReadMoreTextView.ChangeListener {
                 override fun onStateChange(state: ReadMoreTextView.State) {
@@ -49,6 +51,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
             btnMove.setSafeOnClickListener {
                 startActivity(Intent(this@MainActivity, SecondActivity::class.java))
+            }
+        }
+    }
+
+    override fun setupObserver() {
+        super.setupObserver()
+        NetworkStatusUtils(this).observe(this) {
+            when (it) {
+                NetworkStatus.Available -> loge("Internet Connected!")
+                NetworkStatus.Unavailable -> loge("No Internet!!!")
             }
         }
     }
