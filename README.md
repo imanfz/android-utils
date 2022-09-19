@@ -587,6 +587,13 @@ convertPixelsToDp(px: Float, context: Context?): Float
 ```
 isConnectionOn(context: Context): Boolean
 isInternetAvailable(): Boolean
+
+NetworkStatusUtils(context).observe(this, {
+    when(it) {
+        NetworkStatus.Available -> shortToast("Network Connection Established")
+        NetworkStatus.Unavailable -> shortToast("No Internet")
+    }
+})
 ```
 ### [RootUtils](#rootutils)
 ```
