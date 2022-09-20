@@ -1,4 +1,5 @@
 # Android Utils
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.imanfz/android-utils/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.imanfz/android-utils)
 
 [![](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/iman-faizal) [![](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/imanfz)
 
