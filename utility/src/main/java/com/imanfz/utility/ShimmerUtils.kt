@@ -1,7 +1,9 @@
 package com.imanfz.utility
 
 import android.animation.ValueAnimator
+import androidx.core.view.isVisible
 import com.facebook.shimmer.Shimmer
+import com.facebook.shimmer.ShimmerFrameLayout
 
 /**
  * Created by Iman Faizal on 30/Aug/2022
@@ -50,4 +52,15 @@ class ShimmerUtils {
             .setShape(shape)
             .build()
     }
+}
+
+fun ShimmerFrameLayout.show() {
+    isVisible = true
+    showShimmer(true)
+}
+
+fun ShimmerFrameLayout.hide() {
+    stopShimmer()
+    hideShimmer()
+    isVisible = false
 }

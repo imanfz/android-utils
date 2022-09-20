@@ -17,6 +17,7 @@
   - [BaseFragment](#basefragment)
 - Common
   - [SafeClickListener]
+  - [SingleLiveData](#singlelivedata)
 - Dialog
   - [LoadingDialog](#loadingdialog)
   - [QRISDialog](#qrisdialog)
@@ -34,6 +35,7 @@
   - [NavigationExt](#navigationext)
   - [RecyclerViewExt](#recyclerviewext)
   - [StringExt](#stringext)
+  - [TextViewExt](#textviewext)
   - [ViewBindingExt](#viewbindingext)
   - [ViewExt](#viewext)
   - [UriExt]
@@ -95,6 +97,13 @@ or if you have custom BaseFragment, you can extends it:
 class BaseFragment<B : ViewBinding> : BaseFragment<B>() {
     ...
 }
+```
+
+## Common
+### [SingleLiveData](#singlelivedata)
+for handle bug live data in fragment after on backstack
+```
+  val dataState = SingleLiveData<String>()
 ```
 
 ## Dialog
@@ -354,7 +363,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 ```
 ### [NavigationExt](#navigationext)
 ```
-safeNavigate
+findNavController().safeNavigate(action)
+findNavController().safeNavigate(R.id.navigateto)
 ```
 ### [RecyclerViewExt](#recyclerviewext)
 ```
@@ -408,6 +418,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
          
     }
 }
+```
+### [TextViewExt](#textviewext)
+```
+fromHtmlText(text: String)
+setColorOfSubstring(substring: String, color: Int)
+startDrawable(drawableRes: Int)
+startDrawable(drawable: Drawable?) 
+endDrawable(drawableRes: Int)
+endDrawable(drawable: Drawable?) 
+AutoCompleteTextView.setupDropdownUI()
 ```
 ### [ViewBindingExt](#viewbindingext)
    - ViewHolder
@@ -592,6 +612,7 @@ NetworkStatusUtils(context).observe(this, {
     when(it) {
         NetworkStatus.Available -> shortToast("Network Connection Established")
         NetworkStatus.Unavailable -> shortToast("No Internet")
+        NetworkStatus.Lost -> shortToast("Reconnecting")
     }
 })
 ```
@@ -614,6 +635,10 @@ spotlight(
     intensity: Float = 0.35f,
     shape: Int = Shimmer.Shape.RADIAL
 ): Shimmer
+
+// extension
+show()
+hide()
 ```
 ### [ValidaionForm](#validaitonform)
 ```

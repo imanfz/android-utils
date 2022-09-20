@@ -8,8 +8,6 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.imanfz.utility.extension.logd
-import com.imanfz.utility.extension.loge
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -55,57 +53,51 @@ fun isInternetAvailable(): Boolean {
 @Suppress("unused")
 class NetworkStatusUtils(context: Context) : LiveData<NetworkStatus>() {
 
-    private val validateNetworkConnections : ArrayList<Network> = ArrayList()
     private var connectivityManager: ConnectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     private lateinit var connectivityManagerCallback: ConnectivityManager.NetworkCallback
 
-    private fun announceStatus(){
-        if (validateNetworkConnections.isNotEmpty()){
-            postValue(NetworkStatus.Available)
-            logd("Network Connection Established \n$validateNetworkConnections")
-        } else {
-            postValue(NetworkStatus.Unavailable)
-            loge("No Internet Connection!")
-        }
-    }
-
     private fun getConnectivityManagerCallback() =
-        object : ConnectivityManager.NetworkCallback(){
+        object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: Network) {
                 super.onAvailable(network)
                 val networkCapability = connectivityManager.getNetworkCapabilities(network)
-                val hasNetworkConnection = networkCapability?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)?:false
-                if (hasNetworkConnection){
-                    determineInternetAccess(network)
+                val hasNetworkConnection =
+                    networkCapability?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                        ?: false
+                if (hasNetworkConnection) {
+                    determineInternetAccess()
                 }
+            }
+
+            override fun onUnavailable() {
+                super.onUnavailable()
+                postValue(NetworkStatus.Unavailable)
             }
 
             override fun onLost(network: Network) {
                 super.onLost(network)
-                validateNetworkConnections.remove(network)
-                announceStatus()
+                postValue(NetworkStatus.Lost)
             }
 
-            override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
+            override fun onCapabilitiesChanged(
+                network: Network,
+                networkCapabilities: NetworkCapabilities
+            ) {
                 super.onCapabilitiesChanged(network, networkCapabilities)
-                if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)){
-                    determineInternetAccess(network)
-                } else {
-                    validateNetworkConnections.remove(network)
+                if (networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)) {
+                    determineInternetAccess()
                 }
-                announceStatus()
             }
         }
 
-    private fun determineInternetAccess(network: Network) {
-        CoroutineScope(Dispatchers.IO).launch{
-            if (isInternetAvailable()){
-                withContext(Dispatchers.Main){
-                    validateNetworkConnections.add(network)
-                    announceStatus()
+    private fun determineInternetAccess() {
+        CoroutineScope(Dispatchers.IO).launch {
+            if (isInternetAvailable()) {
+                withContext(Dispatchers.Main) {
+                    postValue(NetworkStatus.Available)
                 }
-            }
+            } else postValue(NetworkStatus.Unavailable)
         }
     }
 
@@ -128,4 +120,5 @@ class NetworkStatusUtils(context: Context) : LiveData<NetworkStatus>() {
 sealed class NetworkStatus {
     object Available : NetworkStatus()
     object Unavailable : NetworkStatus()
+    object Lost: NetworkStatus()
 }

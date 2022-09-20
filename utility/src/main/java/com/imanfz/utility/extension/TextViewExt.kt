@@ -1,5 +1,6 @@
 package com.imanfz.utility.extension
 
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.text.Html
 import android.text.Spannable
@@ -8,6 +9,7 @@ import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.imanfz.utility.R
@@ -30,6 +32,22 @@ fun TextView.setColorOfSubstring(substring: String, color: Int) {
     } catch (e: Exception) {
         e.printStackTrace()
     }
+}
+
+fun TextView.startDrawable(@DrawableRes drawableRes: Int) {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(drawableRes, 0, 0, 0)
+}
+
+fun TextView.startDrawable(drawable: Drawable?) {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(drawable, null, null, null)
+}
+
+fun TextView.endDrawable(@DrawableRes drawableRes: Int) {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, drawableRes, 0)
+}
+
+fun TextView.endDrawable(drawable: Drawable?) {
+    setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, drawable, null)
 }
 
 fun AutoCompleteTextView.setupDropdownUI() {
