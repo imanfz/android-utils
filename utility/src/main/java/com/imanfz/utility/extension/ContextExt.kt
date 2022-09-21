@@ -5,9 +5,12 @@ import android.app.AlertDialog
 import android.content.*
 import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.*
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.LocaleList
 import android.provider.OpenableColumns
 import android.view.ContextThemeWrapper
 import android.widget.Toast
@@ -353,4 +356,24 @@ fun Context.addLifecycleObserver(observer: LifecycleObserver) {
         is ContextThemeWrapper -> this.baseContext.addLifecycleObserver(observer)
         is androidx.appcompat.view.ContextThemeWrapper -> this.baseContext.addLifecycleObserver(observer)
     }
+}
+
+fun Context.updateBaseContextLocale(language: String): Context {
+    val locale = Locale(language)
+    var mContext = this
+    val resources: Resources = mContext.resources
+    val configuration: Configuration = resources.configuration
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        val localeList = LocaleList(locale)
+        LocaleList.setDefault(localeList)
+        configuration.setLocales(localeList)
+    } else {
+        configuration.locale = locale
+    }
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
+        mContext = mContext.createConfigurationContext(configuration)
+    } else {
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+    }
+    return mContext
 }

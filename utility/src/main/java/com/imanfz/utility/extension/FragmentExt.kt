@@ -4,7 +4,6 @@ import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
-import androidx.lifecycle.findViewTreeLifecycleOwner
 import kotlinx.coroutines.*
 
 /**

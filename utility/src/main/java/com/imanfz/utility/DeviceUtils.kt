@@ -1,6 +1,7 @@
 package com.imanfz.utility
 
 import android.os.Build
+import androidx.appcompat.app.AppCompatDelegate
 import java.util.*
 
 /**
@@ -63,4 +64,12 @@ fun getDeviceTimeZone(): String {
 
 fun getDeviceLanguage(): String {
     return Locale.getDefault().language
+}
+
+fun setLightTheme() {
+    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+}
+
+fun setDarkTheme() {
+    AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_YES)
 }

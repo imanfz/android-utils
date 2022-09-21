@@ -220,6 +220,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 }
 ```
+
+update language
+```
+open class BaseActivity : AppCompatActivity() {
+    override fun attachBaseContext(newBase: Context) {
+        newBase.apply {
+            val prefs = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+            var lang = prefs.getString(AppPreference.KEY_LANGUAGE, "en") ?: "en"
+            super.attachBaseContext(updateBaseContextLocale(lang))
+        }
+    }
+}
+```
 ### [EditTextExt](#edittextext)
 ```
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -578,6 +591,8 @@ getDeviceOSCode()
 getDeviceOSName()
 getDeviceTimeZone()
 getDeviceLanguage()
+setLightTheme()
+setDarkTheme()
 ```
 ### [DiffUtils](#diffutils)
 mandatory, your model class extend the BaseModel. The detail base model is:
