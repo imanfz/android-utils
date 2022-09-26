@@ -128,3 +128,11 @@ fun String.convertDate(formatSource: String? = null, formatResult: String): Stri
     return if (date != null) formatter.format(date) else ""
 
 }
+
+fun String.getStartAndEndOfSubstring(find: String): Pair<Int, Int> {
+    val start = indexOf(find)
+    return when (start != -1) {
+        true -> Pair(start, start + find.length)
+        false -> Pair(-1, -1)
+    }
+}

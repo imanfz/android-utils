@@ -427,6 +427,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             logi(getLastName()) // output: Faizal
             // get initial can set limitation for your need initial name, example getInitial(limit = 1) -> result I
             logi(getInitials()) // output: IF
+            logi(getStartAndEndOfSubstring("Fai")) // output (5, 7) 
         }
         "afas37h38f".getNumeber() // output: 3738
          
