@@ -2,8 +2,6 @@ package com.imanfz.utility
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -21,14 +19,28 @@ import com.imanfz.utility.extension.snackBarWithAction
  * Created by Iman Faizal on 08/Apr/2022
  **/
 
-class AppUpdateUtils(activity: Activity) : InstallStateUpdatedListener {
+class AppUpdateUtils(activity: Activity) {
 
-    private var appUpdateManager: AppUpdateManager
+    private val appUpdateManager: AppUpdateManager
     private val appUpdateRequestCode = 500
-    private var parentActivity: Activity = activity
+    private val parentActivity: Activity
     private var currentType = AppUpdateType.FLEXIBLE
+    private val installStateUpdatedListener = object : InstallStateUpdatedListener {
+        override fun onStateUpdate(state: InstallState) {
+            if (state.installStatus() == InstallStatus.DOWNLOADED) {
+                popupSnackBarForCompleteUpdate()
+            } else if (state.installStatus() == InstallStatus.DOWNLOADING) {
+                val bytesDownloaded = state.bytesDownloaded()
+                val totalBytesToDownload = state.totalBytesToDownload()
+                // Show update progress bar.
+                logi("Bytes Downloaded: $bytesDownloaded")
+                logi("Total Bytes To Download: $totalBytesToDownload")
+            }
+        }
+    }
 
     init {
+        parentActivity = activity
         appUpdateManager = if (BuildConfig.DEBUG) {
             FakeAppUpdateManager(parentActivity).apply {
                 setUpdateAvailable(2) // app version code
@@ -110,7 +122,7 @@ class AppUpdateUtils(activity: Activity) : InstallStateUpdatedListener {
             }
         }
 
-        appUpdateManager.registerListener(this)
+        appUpdateManager.registerListener(installStateUpdatedListener)
     }
 
     private fun startUpdate(info: AppUpdateInfo, type: Int) {
@@ -145,7 +157,7 @@ class AppUpdateUtils(activity: Activity) : InstallStateUpdatedListener {
                 }
                 ActivityResult.RESULT_IN_APP_UPDATE_FAILED -> {
                     //if you want to request the update again just call checkUpdate()
-                    appUpdateManager.unregisterListener(this)
+                    appUpdateManager.unregisterListener(installStateUpdatedListener)
                     popupSnackBarForTryUpdate()
                     logi(parentActivity.getString(R.string.update_app_failed))
                     //  handle update failure
@@ -173,19 +185,7 @@ class AppUpdateUtils(activity: Activity) : InstallStateUpdatedListener {
     }
 
     fun onDestroy() {
-        appUpdateManager.unregisterListener(this)
-    }
-
-    override fun onStateUpdate(state: InstallState) {
-        if (state.installStatus() == InstallStatus.DOWNLOADED) {
-            popupSnackBarForCompleteUpdate()
-        } else if (state.installStatus() == InstallStatus.DOWNLOADING) {
-            val bytesDownloaded = state.bytesDownloaded()
-            val totalBytesToDownload = state.totalBytesToDownload()
-            // Show update progress bar.
-            logi("Bytes Downloaded: $bytesDownloaded")
-            logi("Total Bytes To Download: $totalBytesToDownload")
-        }
+        appUpdateManager.unregisterListener(installStateUpdatedListener)
     }
 
 }
