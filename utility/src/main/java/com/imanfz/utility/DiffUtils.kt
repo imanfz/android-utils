@@ -7,9 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
  **/
 
 interface BaseModel {
-    fun contains(someValue: String): Boolean = false
-    fun isItemSameWith(value: BaseModel): Boolean = false
-    fun isContentSameWith(value: BaseModel): Boolean = false
+    fun isItemSameWith(value: BaseModel): Boolean = this == value
+    fun isContentSameWith(value: BaseModel): Boolean = this == value
 }
 
 class ItemDiffCallback<T: BaseModel> : DiffUtil.ItemCallback<T>() {
