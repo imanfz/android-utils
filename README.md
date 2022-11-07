@@ -128,6 +128,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 }
+```
 
 ## Extension
 ### [ActivityExt](#activityext)
