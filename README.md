@@ -21,7 +21,6 @@
   - [SingleLiveData](#singlelivedata)
 - Dialog
   - [LoadingDialog](#loadingdialog)
-  - [QRISDialog](#qrisdialog)
   - [ImageViewerDialog](#imageviewerdialog)
 - Extension
   - [ActivityExt](#activityext)
@@ -129,20 +128,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 }
-```
-### [QRISDialog](#qrisdialog)
-```
-class MainActivity : BaseActivity<ActivityMainBinding>() {
-    ...
-    binding.apply {
-        btnQris.setSafeOnClickListener {
-           QRISDialog.newInstance { result ->
-               shortToast("QRIS: $result")
-           }.show(supportFragmentManager, TAG)
-        }
-    }
-}
-```
 
 ## Extension
 ### [ActivityExt](#activityext)

@@ -21,19 +21,9 @@
         android:layout_height="wrap_content"
         android:text="Loading Dialog"
         android:layout_marginTop="@dimen/big_margin"
-        app:layout_constraintTop_toBottomOf="@id/image_view"/>
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/btn_qris"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/big_margin"
-        android:padding="@dimen/big_margin"
-        android:src="@drawable/tx_qris"
-        android:tint="@color/blackTransparent40"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/image_view"
-        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.imanfz.utility.ui.ReadMoreTextView
         android:id="@+id/readMoreTextView"
@@ -43,7 +33,7 @@
         app:readMoreMaxLine="2"
         app:readMoreColor="@color/bluePrimary"
         android:text="testsfsf sfks\nsfsfsf\nsfjfsjsfj\njsfjs oke bos"
-        app:layout_constraintTop_toBottomOf="@id/btn_qris"/>
+        app:layout_constraintTop_toBottomOf="@id/btn_loading"/>
 
     <com.imanfz.utility.ui.LoadingButton
         android:id="@+id/loading_button"

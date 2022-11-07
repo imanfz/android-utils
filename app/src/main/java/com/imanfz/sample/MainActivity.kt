@@ -5,7 +5,6 @@ import com.imanfz.sample.databinding.ActivityMainBinding
 import com.imanfz.utility.NetworkStatus
 import com.imanfz.utility.NetworkStatusUtils
 import com.imanfz.utility.base.BaseActivity
-import com.imanfz.utility.dialog.QRISDialog
 import com.imanfz.utility.extension.*
 import com.imanfz.utility.ui.ReadMoreTextView
 
@@ -22,11 +21,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                     logi("dismiss")
                     hideLoading()
                 }
-            }
-            btnQris.setSafeOnClickListener {
-                QRISDialog.newInstance { result ->
-                    shortToast("QRIS: $result")
-                }.show(supportFragmentManager, TAG)
             }
             readMoreTextView.changeListener = object : ReadMoreTextView.ChangeListener {
                 override fun onStateChange(state: ReadMoreTextView.State) {
@@ -60,7 +54,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         NetworkStatusUtils(this).observe(this) {
             when (it) {
                 NetworkStatus.Available -> loge("Internet Connected!")
-                NetworkStatus.Unavailable -> loge("No Internet!!!")
+                else -> loge("No Internet!!!")
             }
         }
     }
