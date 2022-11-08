@@ -377,3 +377,5 @@ fun Context.updateBaseContextLocale(language: String): Context {
     }
     return mContext
 }
+
+fun Context.getAppName(): String = applicationInfo.loadLabel(packageManager).toString()

@@ -1,9 +1,7 @@
 package com.imanfz.utility.extension
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.imanfz.utility.base.BaseActivity
 import com.imanfz.utility.base.BaseBottomSheetDialogFragment
@@ -80,14 +78,6 @@ inline fun <reified V : ViewBinding> ViewGroup.toBinding(): V {
         ViewGroup::class.java,
         Boolean::class.java
     ).invoke(null, LayoutInflater.from(context), this, false) as V
-}
-
-/**
- * A Simple [BindingViewHolder] providing easier support for ViewBinding
- **/
-open class BindingViewHolder<VB : ViewBinding>(val binding: VB) :
-    RecyclerView.ViewHolder(binding.root) {
-    val context: Context = binding.root.context
 }
 
 /**
