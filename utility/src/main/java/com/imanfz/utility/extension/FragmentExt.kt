@@ -2,8 +2,10 @@ package com.imanfz.utility.extension
 
 import android.app.Activity
 import android.os.Bundle
+import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
+import androidx.navigation.Navigation
 import kotlinx.coroutines.*
 
 /**
@@ -112,6 +114,14 @@ fun Fragment.delayOnLifecycle(
         block()
     }
 }
+
+/**
+ * Get fragment nav controller, if you have second navHostFragment and inside a fragment.
+ * you can use it, because with default findNavController() error
+ *
+ * @param id
+ */
+fun Fragment.getFragmentNavController(@IdRes id: Int) = Navigation.findNavController(requireActivity(), id)
 
 /*
 fun Fragment.showDialogFailSingle(

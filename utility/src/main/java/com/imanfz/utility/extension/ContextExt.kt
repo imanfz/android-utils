@@ -379,3 +379,18 @@ fun Context.updateBaseContextLocale(language: String): Context {
 }
 
 fun Context.getAppName(): String = applicationInfo.loadLabel(packageManager).toString()
+
+/**
+ * Is package installed, for checking package installed or not
+ *
+ * @param packageName
+ * @return true or false
+ */
+fun Context.isPackageInstalled(packageName: String): Boolean {
+    return try {
+        packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+        true
+    } catch (ex: Exception) {
+        false
+    }
+}
