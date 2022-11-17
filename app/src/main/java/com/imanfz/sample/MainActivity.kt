@@ -10,15 +10,15 @@ import com.imanfz.utility.extension.*
 import com.imanfz.utility.ui.ReadMoreTextView
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
+
     private lateinit var appUpdateUtils: AppUpdateUtils
 
     override fun setupView() {
         super.setupView()
-        appUpdateUtils = AppUpdateUtils(this)
-        longToast("Hello World")
+        appUpdateUtils = AppUpdateUtils(this, BuildConfig.DEBUG)
         logi("Hello World")
         binding.apply {
-            imageView.loadImage("https://picsum.photos/id/1039/6945/4635")
+            imageView.loadImage("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/faa48d2d-12c2-43d1-bf23-b5e99857825b/ddanutv-39cde392-7484-42ec-8b83-f00e58094746.png/v1/fill/w_800,h_450,q_80,strp/dance_of_lights_by_ellysiumn_ddanutv-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2ZhYTQ4ZDJkLTEyYzItNDNkMS1iZjIzLWI1ZTk5ODU3ODI1YlwvZGRhbnV0di0zOWNkZTM5Mi03NDg0LTQyZWMtOGI4My1mMDBlNTgwOTQ3NDYucG5nIiwiaGVpZ2h0IjoiPD00NTAiLCJ3aWR0aCI6Ijw9ODAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLndhdGVybWFyayJdLCJ3bWsiOnsicGF0aCI6Ilwvd21cL2ZhYTQ4ZDJkLTEyYzItNDNkMS1iZjIzLWI1ZTk5ODU3ODI1YlwvZWxseXNpdW1uLTQucG5nIiwib3BhY2l0eSI6OTUsInByb3BvcnRpb25zIjowLjQ1LCJncmF2aXR5IjoiY2VudGVyIn19.3USm-rYv-0y6spWqrtA0V2B4-tpDl1qMHX25VTjDd94")
             btnLoading.setSafeOnClickListener {
                 showLoading()
                 delayOnLifecycle {
@@ -63,16 +63,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        appUpdateUtils.onResume()
-    }
-
-    override fun onDestroy() {
-        appUpdateUtils.onDestroy()
-        super.onDestroy()
-    }
-
+    @Suppress("DEPRECATION")
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         appUpdateUtils.onActivityResult(requestCode, resultCode)

@@ -17,7 +17,6 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.coroutineScope
-import androidx.lifecycle.findViewTreeLifecycleOwner
 import kotlinx.coroutines.*
 
 /**
@@ -106,11 +105,17 @@ fun Activity.showKeyboard() {
 }
 
 fun Activity.longSnack(text: String) {
-    currentFocus?.longSnack(text)
+    currentFocus?.shortSnack(text) ?: run {
+        val view: View = window.decorView.findViewById(android.R.id.content)
+        view.longSnack(text)
+    }
 }
 
 fun Activity.shortSnack(text: String) {
-    currentFocus?.shortSnack(text)
+    currentFocus?.shortSnack(text) ?: run {
+        val view: View = window.decorView.findViewById(android.R.id.content)
+        view.shortSnack(text)
+    }
 }
 
 fun Activity.snackBarWithAction(
@@ -118,7 +123,10 @@ fun Activity.snackBarWithAction(
     actionLabel: String,
     onClicked: () -> Unit
 ) {
-    currentFocus?.snackBarWithAction(message, actionLabel, onClicked)
+    currentFocus?.snackBarWithAction(message, actionLabel, onClicked) ?: run {
+        val view: View = window.decorView.findViewById(android.R.id.content)
+        view.snackBarWithAction(message, actionLabel, onClicked)
+    }
 }
 
 fun Activity.delayOnLifecycle(

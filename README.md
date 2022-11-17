@@ -488,17 +488,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private lateinit var appUpdateUtils: AppUpdateUtils
     ...
     override fun onCreate(savedInstanceState: Bundle?) {
+        ...
         appUpdateUtils = AppUpdateUtils(this)
-    }
-    
-    override fun onResume() {
-        super.onResume()
-        appUpdateUtils.onResume()
-    }
-    
-    override fun onDestroy() {
-        appUpdateUtils.onDestroy()
-        super.onDestroy()
     }
     
     @Deprecated("Deprecated in Java")
